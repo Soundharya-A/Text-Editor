@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Editor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="editor-container">
+        <div class="toolbar">
+            <select id="font-family-selector">
+                <option value="">Select Font Family</option>
+            </select>
+            <select id="font-weight-selector" disabled>
+                <option value="">Select Font Weight</option>
+            </select>
+            <label>
+                <input type="checkbox" id="italic-toggle" disabled> Italic
+            </label>
+        </div>
+        <textarea id="editor" placeholder="Type here..."></textarea>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
