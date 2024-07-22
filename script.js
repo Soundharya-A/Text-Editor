@@ -59,16 +59,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const savedItalic = localStorage.getItem('editorItalic') === 'true';
 
         if (savedText) editor.value = savedText;
-        if (savedFontFamily) fontFamilySelector.value = savedFontFamily;
         if (savedFontWeight) fontWeightSelector.value = savedFontWeight;
         if (savedItalic) italicToggle.classList.add('active');
-
         if (savedFontFamily) {
+            fontFamilySelector.value = savedFontFamily;
             populateFontWeightSelector(fontsData[savedFontFamily].variants);
             fontWeightSelector.disabled = false;
             italicToggle.disabled = false;
-            updateFont();
         }
+        updateFont();
     }
 
     function saveSettings() {
@@ -99,6 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (selectedFont) {
             populateFontWeightSelector(fontsData[selectedFont].variants);
             fontWeightSelector.disabled = false;
+            italicToggle.disabled = false;
         } else {
             fontWeightSelector.disabled = true;
             italicToggle.disabled = true;
