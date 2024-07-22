@@ -7,9 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const saveButton = document.getElementById('save-button');
 
     let fontsData;
-
-    // Load the fonts JSON file
-    fetch('fonts.json')
+    fetch('punt-frontend-assignment.json')
         .then(response => response.json())
         .then(data => {
             fontsData = data;
@@ -73,14 +71,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function saveSettings(showAlert = false) {
+    function saveSettings() {
         localStorage.setItem('editorText', editor.value);
         localStorage.setItem('editorFontFamily', fontFamilySelector.value);
         localStorage.setItem('editorFontWeight', fontWeightSelector.value);
         localStorage.setItem('editorItalic', italicToggle.classList.contains('active'));
-        if (showAlert) {
-            alert("Settings have been saved successfully!");
-        }
     }
 
     function resetSettings() {
@@ -111,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
             italicToggle.disabled = true;
         }
         updateFont();
+        saveSettings();
     });
 
     fontWeightSelector.addEventListener('change', function() {
@@ -118,6 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const selectedWeight = fontWeightSelector.value.replace(' Italic', 'italic');
         italicToggle.disabled = !fontsData[selectedFont].variants.includes(selectedWeight);
         updateFont();
+        saveSettings();
     });
 
     italicToggle.addEventListener('click', function() {
