@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const fontFamily = fontFamilySelector.value;
         const fontWeight = fontWeightSelector.value;
         const italic = italicToggle.checked ? 'italic' : 'normal';
-
+        if (fontFamily) {
         let fontUrl = fontsData[fontFamily].url;
         const link = document.createElement('link');
         link.href = fontUrl;
@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         editor.style.fontWeight = fontWeight.replace('italic', '') || 'normal';
         editor.style.fontStyle = italic;
     }
+}
 
     function loadSavedSettings() {
         const savedText = localStorage.getItem('editorText');
@@ -106,5 +107,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     italicToggle.addEventListener('change', function() {
         localStorage.setItem('editorItalic', italicToggle.checked);
+
+        resetButton.addEventListener('click', resetSettings);
+        saveButton.addEventListener('click', saveSettings);
     });
 });
