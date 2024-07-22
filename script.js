@@ -107,7 +107,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     italicToggle.addEventListener('change', function() {
         localStorage.setItem('editorItalic', italicToggle.checked);
-
+        editor.addEventListener('input', saveSettings);
+        fontFamilySelector.addEventListener('change', saveSettings);
+        fontWeightSelector.addEventListener('change', saveSettings);
+        italicToggle.addEventListener('change', saveSettings);
         resetButton.addEventListener('click', resetSettings);
         saveButton.addEventListener('click', saveSettings);
     });
