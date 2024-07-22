@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let fontsData;
 
     // Load the fonts JSON file
-    fetch('punt-frontend-assignment.json')
+    fetch('fonts.json')
         .then(response => response.json())
         .then(data => {
             fontsData = data;
@@ -31,27 +31,28 @@ document.addEventListener('DOMContentLoaded', function() {
         variants.forEach(variant => {
             const option = document.createElement('option');
             option.value = variant;
-            option.textContent = variant;
+            option.textContent = variant.replace('italic', ' Italic');
             fontWeightSelector.appendChild(option);
         });
     }
 
     function updateFont() {
         const fontFamily = fontFamilySelector.value;
-        const fontWeight = fontWeightSelector.value;
-        const italic = italicToggle.checked ? 'italic' : 'normal';
-        if (fontFamily) {
-        let fontUrl = fontsData[fontFamily].url;
-        const link = document.createElement('link');
-        link.href = fontUrl;
-        link.rel = 'stylesheet';
-        document.head.appendChild(link);
+        const fontWeight = fontWeightSelector.value.replace(' Italic', 'italic');
+        const italic = italicToggle.classList.contains('active') ? 'italic' : 'normal';
 
-        editor.style.fontFamily = fontFamily;
-        editor.style.fontWeight = fontWeight.replace('italic', '') || 'normal';
-        editor.style.fontStyle = italic;
+        if (fontFamily) {
+            let fontUrl = fontsData[fontFamily].url;
+            const link = document.createElement('link');
+            link.href = fontUrl;
+            link.rel = 'stylesheet';
+            document.head.appendChild(link);
+
+            editor.style.fontFamily = fontFamily;
+            editor.style.fontWeight = fontWeight.replace('italic', '') || 'normal';
+            editor.style.fontStyle = italic;
+        }
     }
-}
 
     function loadSavedSettings() {
         const savedText = localStorage.getItem('editorText');
@@ -62,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (savedText) editor.value = savedText;
         if (savedFontFamily) fontFamilySelector.value = savedFontFamily;
         if (savedFontWeight) fontWeightSelector.value = savedFontWeight;
-        italicToggle.checked = savedItalic;
+        if (savedItalic) italicToggle.classList.add('active');
 
         if (savedFontFamily) {
             populateFontWeightSelector(fontsData[savedFontFamily].variants);
@@ -71,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
             updateFont();
         }
     }
+
     function saveSettings() {
         localStorage.setItem('editorText', editor.value);
         localStorage.setItem('editorFontFamily', fontFamilySelector.value);
@@ -110,35 +112,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     fontWeightSelector.addEventListener('change', function() {
         const selectedFont = fontFamilySelector.value;
-        const selectedWeight = fontWeightSelector.value;
-        italicToggle.disabled = !fontsData[selectedFont].variants.includes(selectedWeight + 'italic');
+        const selectedWeight = fontWeightSelector.value.replace(' Italic', 'italic');
+        italicToggle.disabled = !fontsData[selectedFont].variants.includes(selectedWeight);
         updateFont();
-    });
-
-    italicToggle.addEventListener('change', updateFont);
-
-    editor.addEventListener('input', function() {
-        localStorage.setItem('editorText', editor.value);
-    });
-
-    fontFamilySelector.addEventListener('change', function() {
-        localStorage.setItem('editorFontFamily', fontFamilySelector.value);
-    });
-
-    fontWeightSelector.addEventListener('change', function() {
-        localStorage.setItem('editorFontWeight', fontWeightSelector.value);
     });
 
     italicToggle.addEventListener('click', function() {
         italicToggle.classList.toggle('active');
         updateFont();
         saveSettings();
-        editor.addEventListener('input', saveSettings);
-        editor.addEventListener('change', saveSettings);
-    
-        fontFamilySelector.addEventListener('change', saveSettings);
-        fontWeightSelector.addEventListener('change', saveSettings);
-    
-        resetButton.addEventListener('click', resetSettings);
-        saveButton.addEventListener('click', saveSettings);
     });
+
+    editor.addEventListener('input', saveSettings);
+    editor.addEventListener('change', saveSettings);
+
+    fontFamilySelector.addEventListener('change', saveSettings);
+    fontWeightSelector.addEventListener('change', saveSettings);
+
+    resetButton.addEventListener('click', resetSettings);
+    saveButton.addEventListener('click', saveSettings);
+});

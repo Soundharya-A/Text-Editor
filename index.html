@@ -12,18 +12,16 @@
             <select id="font-family-selector">
                 <option value="">Select Font Family</option>
             </select>
-            <select id="font-weight-selector" >
+            <select id="font-weight-selector" disabled>
                 <option value="">Select Font Weight</option>
             </select>
-            <label>
-                <button id="italic-toggle" class="toggle-button">Italic</button>
-            </label>
-            <div class="button-container">
+            <button id="italic-toggle" class="toggle-button" disabled>Italic</button>
+        </div>
+        <textarea id="editor" placeholder="Type your text here"></textarea>
+        <div class="button-container">
             <button id="reset-button">Reset</button>
             <button id="save-button">Save</button>
         </div>
-        </div>
-        <textarea id="editor" placeholder="Type your text here"></textarea>
     </div>
     <script src="script.js"></script>
 </body>
