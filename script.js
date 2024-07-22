@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const fontWeightSelector = document.getElementById('font-weight-selector');
     const italicToggle = document.getElementById('italic-toggle');
     const editor = document.getElementById('editor');
+    const resetButton = document.getElementById('reset-button');
+    const saveButton = document.getElementById('save-button');
 
     let fontsData;
 
