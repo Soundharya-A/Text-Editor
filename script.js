@@ -71,6 +71,30 @@ document.addEventListener('DOMContentLoaded', function() {
             updateFont();
         }
     }
+    function saveSettings() {
+        localStorage.setItem('editorText', editor.value);
+        localStorage.setItem('editorFontFamily', fontFamilySelector.value);
+        localStorage.setItem('editorFontWeight', fontWeightSelector.value);
+        localStorage.setItem('editorItalic', italicToggle.classList.contains('active'));
+    }
+
+    function resetSettings() {
+        editor.value = '';
+        fontFamilySelector.value = '';
+        fontWeightSelector.innerHTML = '<option value="">Select Font Weight</option>';
+        fontWeightSelector.disabled = true;
+        italicToggle.classList.remove('active');
+        italicToggle.disabled = true;
+
+        editor.style.fontFamily = '';
+        editor.style.fontWeight = '';
+        editor.style.fontStyle = '';
+
+        localStorage.removeItem('editorText');
+        localStorage.removeItem('editorFontFamily');
+        localStorage.removeItem('editorFontWeight');
+        localStorage.removeItem('editorItalic');
+    }
 
     fontFamilySelector.addEventListener('change', function() {
         const selectedFont = fontFamilySelector.value;
@@ -105,13 +129,16 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('editorFontWeight', fontWeightSelector.value);
     });
 
-    italicToggle.addEventListener('change', function() {
-        localStorage.setItem('editorItalic', italicToggle.checked);
+    italicToggle.addEventListener('click', function() {
+        italicToggle.classList.toggle('active');
+        updateFont();
+        saveSettings();
         editor.addEventListener('input', saveSettings);
+        editor.addEventListener('change', saveSettings);
+    
         fontFamilySelector.addEventListener('change', saveSettings);
         fontWeightSelector.addEventListener('change', saveSettings);
-        italicToggle.addEventListener('change', saveSettings);
+    
         resetButton.addEventListener('click', resetSettings);
         saveButton.addEventListener('click', saveSettings);
     });
-});
