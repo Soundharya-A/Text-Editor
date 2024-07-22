@@ -73,12 +73,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function saveSettings() {
+    function saveSettings(showAlert = false) {
         localStorage.setItem('editorText', editor.value);
         localStorage.setItem('editorFontFamily', fontFamilySelector.value);
         localStorage.setItem('editorFontWeight', fontWeightSelector.value);
         localStorage.setItem('editorItalic', italicToggle.classList.contains('active'));
-        alert("Settings have been saved successfully!");
+        if (showAlert) {
+            alert("Settings have been saved successfully!");
+        }
     }
 
     function resetSettings() {
@@ -131,5 +133,8 @@ document.addEventListener('DOMContentLoaded', function() {
     fontWeightSelector.addEventListener('change', saveSettings);
 
     resetButton.addEventListener('click', resetSettings);
-    saveButton.addEventListener('click', saveSettings);
+    saveButton.addEventListener('click', function()
+    {
+        saveSettings(true);
+    });
 });
