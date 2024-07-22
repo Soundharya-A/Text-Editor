@@ -29,30 +29,28 @@ document.addEventListener('DOMContentLoaded', function() {
         variants.forEach(variant => {
             const option = document.createElement('option');
             option.value = variant;
-            option.textContent = variant.replace('italic', ' Italic');
+            option.textContent = variant;
             fontWeightSelector.appendChild(option);
         });
     }
 
     function updateFont() {
         const fontFamily = fontFamilySelector.value;
-        const fontWeight = fontWeightSelector.value.replace(' Italic', 'italic');
+        const fontWeight = fontWeightSelector.value;
         const italic = italicToggle.checked ? 'italic' : 'normal';
 
-        if (fontFamily) {
+        
             let fontUrl = fontsData[fontFamily].url;
-            let link = document.querySelector(`link[href*="${fontUrl}"]`);
-            if (!link) {
-            link = document.createElement('link');
+            const link = document.createElement('link');
             link.href = fontUrl;
             link.rel = 'stylesheet';
             document.head.appendChild(link);
-            }
+
             editor.style.fontFamily = fontFamily;
             editor.style.fontWeight = fontWeight.replace('italic', '') || 'normal';
             editor.style.fontStyle = italic;
         }
-    }
+
 
     function loadSavedSettings() {
         const savedText = localStorage.getItem('editorText');
