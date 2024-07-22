@@ -4,55 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text Editor</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        #editor {
-            width: 100%;
-            height: 200px;
-            margin-bottom: 10px;
-        }
-        #controls {
-            margin-bottom: 10px;
-        }
-        .button-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 10px;
-        }
-        button {
-            margin-left: 10px;
-        }
-        .active {
-            font-style: italic;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <textarea id="editor" placeholder="Type your text here"></textarea>
-    
-    <div id="controls">
-        <label for="font-family-selector">Font Family:</label>
-        <select id="font-family-selector">
-            <option value="">Select Font</option>
-        </select>
-
-        <label for="font-weight-selector">Font Weight:</label>
-        <select id="font-weight-selector">
-            <option value="">Select Font Weight</option>
-        </select>
-
-        <label for="italic-toggle">Italic:</label>
-        <button id="italic-toggle">Toggle Italic</button>
+    <div class="editor-container">
+        <div class="toolbar">
+            <select id="font-family-selector">
+                <option value="">Select Font Family</option>
+            </select>
+            <select id="font-weight-selector">
+                <option value="">Select Font Weight</option>
+            </select>
+            <button id="italic-toggle" class="toggle-button">Italic</button>
+        </div>
+        <textarea id="editor" placeholder="Type your text here"></textarea>
+        <div class="button-container">
+            <button id="reset-button">Reset</button>
+            <button id="save-button">Save</button>
+        </div>
     </div>
-
-    <div class="button-container">
-        <button id="reset-button">Reset</button>
-        <button id="save-button">Save</button>
-    </div>
-
     <script src="script.js"></script>
 </body>
 </html>
