@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const savedFontWeight = localStorage.getItem('editorFontWeight');
         const savedItalic = localStorage.getItem('editorItalic') === 'true';
 
-        if (savedText) editor.value = savedText;
+        if (savedHtml) editor.innerHTML = savedHtml;
         if (savedFontWeight) fontWeightSelector.value = savedFontWeight;
         if (savedItalic) italicToggle.classList.add('active');
         if (savedFontFamily) {
