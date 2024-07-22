@@ -48,7 +48,3 @@ button:hover {
     bottom: 10px;
     right: 10px;
 }
-.toggle-button.active {
-    background-color: #ddd;
-    font-style: italic;
-}

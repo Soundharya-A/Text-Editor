@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateFont() {
         const fontFamily = fontFamilySelector.value;
         const fontWeight = fontWeightSelector.value.replace(' Italic', 'italic');
-        const italic = italicToggle.classList.contains('active') ? 'italic' : 'normal';
+        const italic = italicToggle.checked ? 'italic' : 'normal';
 
         if (fontFamily) {
             let fontUrl = fontsData[fontFamily].url;
