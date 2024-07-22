@@ -41,11 +41,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (fontFamily) {
             let fontUrl = fontsData[fontFamily].url;
-            const link = document.createElement('link');
+            let link = document.querySelector(`link[href*="${fontUrl}"]`);
+            if (!link) {
+            link = document.createElement('link');
             link.href = fontUrl;
             link.rel = 'stylesheet';
             document.head.appendChild(link);
-
+            }
             editor.style.fontFamily = fontFamily;
             editor.style.fontWeight = fontWeight.replace('italic', '') || 'normal';
             editor.style.fontStyle = italic;
