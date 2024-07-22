@@ -133,5 +133,6 @@ document.addEventListener('DOMContentLoaded', function() {
     saveButton.addEventListener('click', function()
     {
         saveSettings(true);
+        alert("Settings have been saved successfully!");
     });
 });
