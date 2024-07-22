@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('editorFontFamily', fontFamilySelector.value);
         localStorage.setItem('editorFontWeight', fontWeightSelector.value);
         localStorage.setItem('editorItalic', italicToggle.classList.contains('active'));
+        alert("Settings have been saved successfully!");
     }
 
     function resetSettings() {
