@@ -82,9 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
         editor.value = '';
         fontFamilySelector.value = '';
         fontWeightSelector.innerHTML = '<option value="">Select Font Weight</option>';
-        fontWeightSelector.disabled = true;
         italicToggle.classList.remove('active');
-        italicToggle.disabled = true;
 
         editor.style.fontFamily = '';
         editor.style.fontWeight = '';
